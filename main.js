@@ -2,9 +2,10 @@ let form = document.getElementById('form')
 let submitBtn = document.getElementById('submitBtn')
 let addTaskBtn = document.getElementById('addTaskBtn')
 
+// Add task button
 addTaskBtn.addEventListener('click', () => {
     addTaskBtn.style.display = 'none'
-    form.style.display = 'grid'
+    form.style.height = '40rem'
     submitBtn.style.display = 'block'
 })
 
@@ -16,6 +17,7 @@ let workCat = document.getElementById('workCat')
 let otherCat = document.getElementById('otherCat')
 let category = ''
 
+// Category 
 personalCat.addEventListener('click', () => {
     personalCat.classList.add('active-cat')
     familyCat.classList.remove('active-cat')
@@ -77,7 +79,9 @@ form.addEventListener('submit', (e) => {
 
 let taskList = []
 
+//Add task function
 submitBtn.addEventListener('click', () => {
+    //Add task to array
     let taskBlock = {
         task: document.getElementById('task').value,
         hourStart: document.getElementById('hourStart').value,
@@ -86,6 +90,8 @@ submitBtn.addEventListener('click', () => {
         comment: document.getElementById('comment').value
     }
     taskList.push(taskBlock)
+
+    //Create task
     let task = document.createElement('div')
     task.classList.add('task-group')
     task.innerHTML = `
@@ -100,14 +106,16 @@ submitBtn.addEventListener('click', () => {
         <div class="task-group-info">
             <span class="category">${taskBlock.category}</span>
             <p class="text">${taskBlock.comment}</p>
-            <a href="#" class="finish-task-btn">Finalizar</a>    
+            <a href="#" class="finish-task-btn" onmouseenter= "deleteTask()">Finalizar</a>    
         </div>
     </div>
     `
     document.getElementById('tasks').appendChild(task)
 
+    setTaskList()
+
     alert('Task add succesfully')
-    form.style.display = 'none'
+    form.style.height = '0'
     addTaskBtn.style.display = 'flex'
 
     //Reset addTask form
@@ -123,6 +131,7 @@ submitBtn.addEventListener('click', () => {
     otherCat.classList.remove('active-cat')
 })
 
+//Carrousel task
 let taskGroupContent = document.getElementsByClassName('task-group-content')
 function openTask() {
     for (let i = 0; i < taskGroupContent.length; i++){
@@ -132,3 +141,27 @@ function openTask() {
         })
     }    
 }
+
+//Delete task
+let tasks = document.getElementById('tasks')
+let finishTask = document.getElementsByClassName('finish-task-btn')
+let taskGroup = document.getElementsByClassName('task-group')
+function deleteTask() {
+    for (let i = 0; i < finishTask.length; i++) {
+        finishTask[i].addEventListener('click', function() {
+            tasks.removeChild(taskGroup[i])
+            alert('Task deleted!')
+        })
+    }
+}
+
+//local storage
+const setTaskList = () => {
+    localStorage.setItem('Tasks', JSON.stringify(taskList))
+}
+
+const getTaskList = () => {
+    const dataTaskList = JSON.parse(localStorage.getItem('Tasks'))
+}
+
+setTaskList()
