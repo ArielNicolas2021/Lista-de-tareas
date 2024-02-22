@@ -1,11 +1,12 @@
 let form = document.getElementById('form')
 let submitBtn = document.getElementById('submitBtn')
-let addTaskBtn = document.getElementById('addTaskBtn')
+let addTaskBtn = document.getElementById('newTaskBtn')
+let prueba = document.getElementById('prueba')
 
 // Add task button
 addTaskBtn.addEventListener('click', () => {
     addTaskBtn.style.display = 'none'
-    form.style.height = '40rem'
+    form.classList.add('active-form')
     submitBtn.style.display = 'block'
 })
 
@@ -73,6 +74,7 @@ otherCat.addEventListener('click', () => {
     category = 'Other'
 })
 
+// Prevent default
 form.addEventListener('submit', (e) => {
     e.preventDefault()
 })
@@ -81,57 +83,65 @@ let taskList = []
 
 //Add task function
 submitBtn.addEventListener('click', () => {
-    //Add task to array
-    let taskBlock = {
-        task: document.getElementById('task').value,
-        hourStart: document.getElementById('hourStart').value,
-        hourFinish: document.getElementById('hourFinish').value,
-        category: category,
-        comment: document.getElementById('comment').value
-    }
-    taskList.push(taskBlock)
+    //Check valid inputs
+    if (document.getElementById('task').value === '' || document.getElementById('hourStart').value === '' || document.getElementById('hourFinish').value === '' || document.getElementById('comment').value === '' || category === '') {
+        alert('Please, fill the inputs')
+    } else {
+        //Add task to array
+        let taskBlock = {
+            task: document.getElementById('task').value,
+            hourStart: document.getElementById('hourStart').value,
+            hourFinish: document.getElementById('hourFinish').value,
+            category: category,
+            comment: document.getElementById('comment').value
+        }
+        taskList.push(taskBlock)
 
-    //Create task
-    let task = document.createElement('div')
-    task.classList.add('task-group')
-    task.innerHTML = `
-    <div class="task-group-content" onmouseenter="openTask()">
-        <span class="time">${taskBlock.hourStart}</span>
-        <hr>
-        <p class="task">${taskBlock.task}</p>
-    </div>
-    <div class="task-group-active active">
-        <span class="time-active">${taskBlock.hourFinish}</span>
-        <hr>
-        <div class="task-group-info">
-            <span class="category">${taskBlock.category}</span>
-            <p class="text">${taskBlock.comment}</p>
-            <a href="#" class="finish-task-btn" onmouseenter= "deleteTask()">Finalizar</a>    
+        //Create task
+        let task = document.createElement('div')
+        task.classList.add('task-group')
+        task.innerHTML = `
+        <div class="task-group-content" onmouseenter="openTask()">
+            <span class="time">${taskBlock.hourStart}</span>
+            <hr>
+            <p class="task">${taskBlock.task}</p>
         </div>
-    </div>
-    `
-    document.getElementById('tasks').appendChild(task)
+        <div class="task-group-active active">
+            <span class="time-active">${taskBlock.hourFinish}</span>
+            <hr>
+            <div class="task-group-info">
+                <span class="category">${taskBlock.category}</span>
+                <p class="text">${taskBlock.comment}</p>
+                <a href="#" class="finish-task-btn" onmouseenter= "deleteTask()">Finalizar</a>    
+            </div>
+        </div>
+        `
+        document.getElementById('tasks').appendChild(task)
 
-    setTaskList()
+        setTaskList()
 
-    alert('Task add succesfully')
-    form.style.height = '0'
-    addTaskBtn.style.display = 'flex'
+        alert('Task add succesfully')
+        form.style.height = '0'
+        form.style.border = 'none'
+        addTaskBtn.style.display = 'flex'
+        submitBtn.style.display = 'none'
 
-    //Reset addTask form
-    document.getElementById('task').value = ''
-    document.getElementById('hourStart').value = ''
-    document.getElementById('hourFinish').value = ''
-    document.getElementById('comment').value = ''
-    personalCat.classList.remove('active-cat')
-    familyCat.classList.remove('active-cat')
-    fitCat.classList.remove('active-cat')
-    foodCat.classList.remove('active-cat')
-    workCat.classList.remove('active-cat')
-    otherCat.classList.remove('active-cat')
+        //Reset addTask form
+        document.getElementById('task').value = ''
+        document.getElementById('hourStart').value = ''
+        document.getElementById('hourFinish').value = ''
+        document.getElementById('comment').value = ''
+        personalCat.classList.remove('active-cat')
+        familyCat.classList.remove('active-cat')
+        fitCat.classList.remove('active-cat')
+        foodCat.classList.remove('active-cat')
+        workCat.classList.remove('active-cat')
+        otherCat.classList.remove('active-cat')
+        category = ''
+    }
 })
 
-//Carrousel task
+//Acordeon task
 let taskGroupContent = document.getElementsByClassName('task-group-content')
 function openTask() {
     for (let i = 0; i < taskGroupContent.length; i++){
