@@ -1,12 +1,12 @@
 let form = document.getElementById('form')
 let submitBtn = document.getElementById('submitBtn')
 let addTaskBtn = document.getElementById('newTaskBtn')
-let prueba = document.getElementById('prueba')
+let position = document.getElementById('position')
 
 // Add task button
 addTaskBtn.addEventListener('click', () => {
     addTaskBtn.style.display = 'none'
-    form.classList.add('active-form')
+    position.classList.add('active-form')
     submitBtn.style.display = 'block'
 })
 
@@ -101,18 +101,20 @@ submitBtn.addEventListener('click', () => {
         let task = document.createElement('div')
         task.classList.add('task-group')
         task.innerHTML = `
-        <div class="task-group-content" onmouseenter="openTask()">
+        <div class="task-group-content">
             <span class="time">${taskBlock.hourStart}</span>
             <hr>
             <p class="task">${taskBlock.task}</p>
         </div>
-        <div class="task-group-active active">
-            <span class="time-active">${taskBlock.hourFinish}</span>
-            <hr>
-            <div class="task-group-info">
-                <span class="category">${taskBlock.category}</span>
-                <p class="text">${taskBlock.comment}</p>
-                <a href="#" class="finish-task-btn" onmouseenter= "deleteTask()">Finalizar</a>    
+        <div class="dg">
+            <div class="task-group-active">
+                <span class="time-active">${taskBlock.hourFinish}</span>
+                <hr>
+                <div class="task-group-info">
+                    <span class="category">${taskBlock.category}</span>
+                    <p class="text">${taskBlock.comment}</p>
+                    <a href="#" class="finish-task-btn" onclick= "deleteTask">Finalizar</a>    
+                </div>
             </div>
         </div>
         `
@@ -121,8 +123,7 @@ submitBtn.addEventListener('click', () => {
         setTaskList()
 
         alert('Task add succesfully')
-        form.style.height = '0'
-        form.style.border = 'none'
+        position.classList.remove('active-form')
         addTaskBtn.style.display = 'flex'
         submitBtn.style.display = 'none'
 
@@ -141,16 +142,6 @@ submitBtn.addEventListener('click', () => {
     }
 })
 
-//Acordeon task
-let taskGroupContent = document.getElementsByClassName('task-group-content')
-function openTask() {
-    for (let i = 0; i < taskGroupContent.length; i++){
-        taskGroupContent[i].addEventListener('click', function(){
-            let acordeon = this.nextElementSibling
-            acordeon.classList.toggle('active')
-        })
-    }    
-}
 
 //Delete task
 let tasks = document.getElementById('tasks')
