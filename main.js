@@ -89,56 +89,23 @@ submitBtn.addEventListener('click', () => {
     } else {
         //Add task to array
         let taskBlock = {
-            task: document.getElementById('task').value,
-            hourStart: document.getElementById('hourStart').value,
-            hourFinish: document.getElementById('hourFinish').value,
-            category: category,
-            comment: document.getElementById('comment').value
+            'task': document.getElementById('task').value,
+            'hourStart': document.getElementById('hourStart').value,
+            'hourFinish': document.getElementById('hourFinish').value,
+            'category': category,
+            'comment': document.getElementById('comment').value
         }
-        taskList.push(taskBlock)
+        taskList = [...taskList, taskBlock]
+        createTask()
 
-        //Create task
-        let task = document.createElement('div')
-        task.classList.add('task-group')
-        task.innerHTML = `
-        <div class="task-group-content">
-            <span class="time">${taskBlock.hourStart}</span>
-            <hr>
-            <p class="task">${taskBlock.task}</p>
-        </div>
-        <div class="dg">
-            <div class="task-group-active">
-                <span class="time-active">${taskBlock.hourFinish}</span>
-                <hr>
-                <div class="task-group-info">
-                    <span class="category">${taskBlock.category}</span>
-                    <p class="text">${taskBlock.comment}</p>
-                    <a href="#" class="finish-task-btn" onclick= "deleteTask">Finalizar</a>    
-                </div>
-            </div>
-        </div>
-        `
-        document.getElementById('tasks').appendChild(task)
-
-        setTaskList()
+        //Reset addTask form
+        clearForm()
 
         alert('Task add succesfully')
         position.classList.remove('active-form')
         addTaskBtn.style.display = 'flex'
         submitBtn.style.display = 'none'
 
-        //Reset addTask form
-        document.getElementById('task').value = ''
-        document.getElementById('hourStart').value = ''
-        document.getElementById('hourFinish').value = ''
-        document.getElementById('comment').value = ''
-        personalCat.classList.remove('active-cat')
-        familyCat.classList.remove('active-cat')
-        fitCat.classList.remove('active-cat')
-        foodCat.classList.remove('active-cat')
-        workCat.classList.remove('active-cat')
-        otherCat.classList.remove('active-cat')
-        category = ''
     }
 })
 
@@ -147,22 +114,54 @@ submitBtn.addEventListener('click', () => {
 let tasks = document.getElementById('tasks')
 let finishTask = document.getElementsByClassName('finish-task-btn')
 let taskGroup = document.getElementsByClassName('task-group')
-function deleteTask() {
-    for (let i = 0; i < finishTask.length; i++) {
-        finishTask[i].addEventListener('click', function() {
-            tasks.removeChild(taskGroup[i])
-            alert('Task deleted!')
-        })
+
+tasks.addEventListener('click', (e) => {
+    if(e.target.tagName === 'A') {
+        alert('Task deleted!')
+        e.target.parentNode.parentNode.parentNode.remove()
     }
+}, false)
+
+
+// Create task function
+function createTask() {
+    let row = document.createElement('tr')
+    row.classList.add('task-group')
+    row.innerHTML = `
+        <td class="task-group-content">
+            <span class="time">${taskList[taskList.length - 1].hourStart}</span>
+            <p class="task">${taskList[taskList.length - 1].task}</p>
+        </td>
+        <td class="task-group-active">
+            <span class="time-active">${taskList[taskList.length - 1].hourFinish}</span>
+            <div class="task-group-info">
+                <span class="category">${taskList[taskList.length - 1].category}</span>
+                <p class="text">${taskList[taskList.length - 1].comment}</p>
+                <a href="#" class="finish-task-btn">Finish task</a>
+            </div>
+        </td>
+    `
+    tasks.appendChild(row)
+}
+setStorage()
+
+
+// Clear form function
+function clearForm() {
+    document.getElementById('task').value = ''
+    document.getElementById('hourStart').value = ''
+    document.getElementById('hourFinish').value = ''
+    document.getElementById('comment').value = ''
+    personalCat.classList.remove('active-cat')
+    familyCat.classList.remove('active-cat')
+    fitCat.classList.remove('active-cat')
+    foodCat.classList.remove('active-cat')
+    workCat.classList.remove('active-cat')
+    otherCat.classList.remove('active-cat')
+    category = ''
 }
 
 //local storage
-const setTaskList = () => {
-    localStorage.setItem('Tasks', JSON.stringify(taskList))
+function setStorage() {
+    localStorage.setItem('tasks', JSON.stringify(taskList))
 }
-
-const getTaskList = () => {
-    const dataTaskList = JSON.parse(localStorage.getItem('Tasks'))
-}
-
-setTaskList()

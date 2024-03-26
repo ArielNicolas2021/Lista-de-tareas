@@ -59,20 +59,15 @@ svg {
     padding: 1rem;
 }
 
-.dg {
-    display: grid;
-    grid-template-rows: 0.1fr;
-    transition: grid-template-rows 1s;
-    border-top: 1px solid #bebebe;
-}
-
 .task-group-active {
-    overflow: hidden;
     display: flex;
+    height: 1rem;
+    overflow: hidden;
+    transition: height 1s;
 }
 
-.dg:hover {
-    grid-template-rows: 1fr;
+.task-group-active:hover {
+    height: 10rem;
 }
 
 .time-active {
@@ -80,7 +75,6 @@ svg {
 }
 
 .task-group-info {
-    padding: 0 1rem;
     margin: 1rem;
 }
 
@@ -94,6 +88,11 @@ svg {
     margin: 1rem 0 2rem 0;
     font-weight: 300;
 }
+
+.time, .time-active {
+    border-right: 1px solid black;
+}
+
 
 .finish-task-btn {
     background-color: #000;
@@ -225,6 +224,7 @@ svg {
     border: 1px solid #000;
 }
 
+
 /* Tablet style */
 @media(min-width: 426px){
     .task-group {
@@ -285,7 +285,8 @@ svg {
     }
 
     .finish-task-btn {
-        font-size: 1.5vw;
+        font-size: 20px;
+        width: 10rem;
     }
 
     .active {
