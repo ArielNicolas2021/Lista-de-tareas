@@ -254,6 +254,10 @@ svg {
         width: 60%;
     }
 
+    .task-group-active:hover {
+        height: 11rem;
+    }    
+
     .active-form {
         width: 60%;
         left: 20%;
