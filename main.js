@@ -81,6 +81,7 @@ form.addEventListener('submit', (e) => {
 
 let taskList = []
 
+
 //Add task function
 submitBtn.addEventListener('click', () => {
     //Check valid inputs
@@ -93,9 +94,12 @@ submitBtn.addEventListener('click', () => {
             'hourStart': document.getElementById('hourStart').value,
             'hourFinish': document.getElementById('hourFinish').value,
             'category': category,
-            'comment': document.getElementById('comment').value
+            'comment': document.getElementById('comment').value,
+            'id': Date.now()
         }
         taskList = [...taskList, taskBlock]
+        localStorage.setItem('tasks', JSON.stringify(taskList))
+
         createTask()
 
         //Reset addTask form
@@ -105,7 +109,6 @@ submitBtn.addEventListener('click', () => {
         position.classList.remove('active-form')
         addTaskBtn.style.display = 'flex'
         submitBtn.style.display = 'none'
-
     }
 })
 
@@ -119,6 +122,10 @@ tasks.addEventListener('click', (e) => {
     if(e.target.tagName === 'A') {
         alert('Task deleted!')
         e.target.parentNode.parentNode.parentNode.remove()
+        const deleteId = parseInt(e.target.getAttribute('task-id'))
+        const newTaskList = taskList.filter(i => i.id != deleteId)
+        taskList = newTaskList
+        localStorage.setItem('tasks', JSON.stringify(taskList))
     }
 }, false)
 
@@ -137,13 +144,12 @@ function createTask() {
             <div class="task-group-info">
                 <span class="category">${taskList[taskList.length - 1].category}</span>
                 <p class="text">${taskList[taskList.length - 1].comment}</p>
-                <a href="#" class="finish-task-btn">Finish task</a>
+                <a href="#" class="finish-task-btn" task-id="${taskList.id}">Finish task</a>
             </div>
         </td>
     `
     tasks.appendChild(row)
 }
-setStorage()
 
 
 // Clear form function
@@ -162,6 +168,27 @@ function clearForm() {
 }
 
 //local storage
-function setStorage() {
-    localStorage.setItem('tasks', JSON.stringify(taskList))
-}
+    
+window.addEventListener('load', () => {
+    let getTasksList = JSON.parse(localStorage.getItem('tasks'))
+    for(let i of getTasksList) {
+        taskList = [...taskList, i]
+        let row = document.createElement('tr')
+        row.classList.add('task-group')
+        row.innerHTML = `
+            <td class="task-group-content">
+                <span class="time">${i.hourStart}</span>
+                <p class="task">${i.task}</p>
+            </td>
+            <td class="task-group-active">
+                <span class="time-active">${i.hourFinish}</span>
+                <div class="task-group-info">
+                    <span class="category">${i.category}</span>
+                    <p class="text">${i.comment}</p>
+                    <a href="#" class="finish-task-btn" task-id="${i.id}">Finish task</a>
+                </div>
+            </td>
+        `
+        tasks.appendChild(row)
+    }
+})
