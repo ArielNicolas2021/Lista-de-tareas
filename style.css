@@ -61,13 +61,17 @@ svg {
 
 .task-group-active {
     display: flex;
-    height: 1rem;
     overflow: hidden;
-    transition: height 1s;
 }
 
-.task-group-active:hover {
-    height: 10rem;
+.grid {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .5s ease;
+}
+
+.show {
+    grid-template-rows: 1fr;
 }
 
 .time-active {
@@ -252,11 +256,7 @@ svg {
 
     .task-group {
         width: 60%;
-    }
-
-    .task-group-active:hover {
-        height: 11rem;
-    }    
+    }  
 
     .active-form {
         width: 60%;

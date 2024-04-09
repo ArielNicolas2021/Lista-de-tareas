@@ -119,13 +119,18 @@ let finishTask = document.getElementsByClassName('finish-task-btn')
 let taskGroup = document.getElementsByClassName('task-group')
 
 tasks.addEventListener('click', (e) => {
-    if(e.target.tagName === 'A') {
+    let objetive = e.target
+    if(objetive.tagName === 'A') {
         alert('Task deleted!')
-        e.target.parentNode.parentNode.parentNode.remove()
-        const deleteId = parseInt(e.target.getAttribute('task-id'))
+        objetive.parentNode.parentNode.parentNode.remove()
+        const deleteId = parseInt(objetive.getAttribute('task-id'))
         const newTaskList = taskList.filter(i => i.id != deleteId)
         taskList = newTaskList
         localStorage.setItem('tasks', JSON.stringify(taskList))
+    }
+    if(objetive.classList.contains('task-group-content')) {
+        let objetiveGrid = objetive.nextSibling.nextSibling
+        objetiveGrid.classList.toggle('show')
     }
 }, false)
 
@@ -139,17 +144,22 @@ function createTask() {
             <span class="time">${taskList[taskList.length - 1].hourStart}</span>
             <p class="task">${taskList[taskList.length - 1].task}</p>
         </td>
-        <td class="task-group-active">
-            <span class="time-active">${taskList[taskList.length - 1].hourFinish}</span>
-            <div class="task-group-info">
-                <span class="category">${taskList[taskList.length - 1].category}</span>
-                <p class="text">${taskList[taskList.length - 1].comment}</p>
-                <a href="#" class="finish-task-btn" task-id="${taskList.id}">Finish task</a>
+        <td class="grid">
+            <div class="task-group-active">
+                <span class="time-active">${taskList[taskList.length - 1].hourFinish}</span>
+                <div class="task-group-info">
+                    <span class="category">${taskList[taskList.length - 1].category}</span>
+                    <p class="text">${taskList[taskList.length - 1].comment}</p>
+                    <a href="#" class="finish-task-btn" task-id="${taskList.id}">Finish task</a>
+                </div>
             </div>
         </td>
+        
     `
     tasks.appendChild(row)
 }
+
+// Carrousel
 
 
 // Clear form function
@@ -180,14 +190,17 @@ window.addEventListener('load', () => {
                 <span class="time">${i.hourStart}</span>
                 <p class="task">${i.task}</p>
             </td>
-            <td class="task-group-active">
-                <span class="time-active">${i.hourFinish}</span>
-                <div class="task-group-info">
-                    <span class="category">${i.category}</span>
-                    <p class="text">${i.comment}</p>
-                    <a href="#" class="finish-task-btn" task-id="${i.id}">Finish task</a>
+            <td class="grid">
+                <div class="task-group-active">
+                    <span class="time-active">${i.hourFinish}</span>
+                    <div class="task-group-info">
+                        <span class="category">${i.category}</span>
+                        <p class="text">${i.comment}</p>
+                        <a href="#" class="finish-task-btn" task-id="${i.id}">Finish task</a>
+                    </div>
                 </div>
             </td>
+            
         `
         tasks.appendChild(row)
     }
