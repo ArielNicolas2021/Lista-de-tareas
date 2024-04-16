@@ -1,0 +1,156 @@
+/* Global */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap');
+
+body {
+    min-height: 100vh;
+    background-color: #cecece;
+    font-family: 'Roboto', sans-serif;
+}
+
+main {
+    min-height: 100vh;
+}
+
+/* Mobile style */
+svg {
+    width: 100px;
+}
+
+    /*Added tasks*/
+.task-group {
+    background-color: #eee;
+    border: 1px solid #bebebe;
+    box-shadow: 1px 10px 10px -5px rgba(0,0,0,0.4);
+}
+
+.task-group:hover {
+    background-color: #e0e0e0;
+}
+
+.task-group-content {
+    height: 6.25rem;
+}
+
+hr {
+    margin: 0;
+    border: 1px solid grey;
+    opacity: 1;
+}
+
+.task-group-active {
+    overflow: hidden;
+}
+
+.grid {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .5s ease;
+}
+
+.show {
+    grid-template-rows: 1fr;
+}
+
+.category {
+    border: 1px solid #000;
+    background-color: #fff;
+}
+
+.finish-task-btn {
+    background-color: #000;
+    color: #eee;
+    text-decoration: none;
+    border-radius: 2rem;
+}
+
+    /* Add task form */
+.new-task-btn {
+    position:fixed;
+    bottom: 5%;
+    right: 5%;
+    cursor: pointer;
+}
+
+#addTaskBtn {
+    position: sticky;
+}
+
+.position {
+    border-radius: 2rem 2rem 0 0;
+    left: 0;
+    width: 100%;
+
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 1s;
+}
+
+.new-task-form {
+    border-radius: 2rem 2rem 0 0;
+    background-color: #eee;
+    overflow: scroll;
+    box-shadow: 1px 10px 10px -5px rgba(0,0,0,0.4);
+}
+
+.active-form {
+    border: 1px solid #bebebe;
+    grid-template-rows: 1fr;
+}
+
+.task-form {
+    background-color: #bebebe;
+    border: none;
+    border-radius: 2rem;
+}
+
+.cat {
+    width: 30%;
+}
+
+.hour-input {
+    background-color: #bebebe;
+    border: none;
+    border-radius: 2rem;
+}
+
+.comment {
+    background-color: #bebebe;
+    border: none;
+}
+
+.submit-task-btn {
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    cursor: pointer;
+}
+
+#submitBtn {
+    display: none;
+}
+
+#addTaskBtn {
+    display: block;
+    z-index: 2;
+}
+
+.active-cat {
+    border: 1px solid #000;
+}
+
+/* Desktop style */
+@media(min-width: 768px){
+    .position {
+        left: 15%;
+        width: 70%;
+    }
+
+    .submit-task-btn {
+        right: 16%;
+    }
+
+    .task-group {
+        width: 75%;
+        margin: 0 auto;
+    }
+}

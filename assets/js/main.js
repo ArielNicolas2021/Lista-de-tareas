@@ -7,6 +7,7 @@ let position = document.getElementById('position')
 addTaskBtn.addEventListener('click', () => {
     addTaskBtn.style.display = 'none'
     position.classList.add('active-form')
+    form.classList.add('p-3')
     submitBtn.style.display = 'block'
 })
 
@@ -109,6 +110,7 @@ submitBtn.addEventListener('click', () => {
         position.classList.remove('active-form')
         addTaskBtn.style.display = 'flex'
         submitBtn.style.display = 'none'
+        form.classList.remove('p-3')
     }
 })
 
@@ -122,14 +124,17 @@ tasks.addEventListener('click', (e) => {
     let objetive = e.target
     if(objetive.tagName === 'A') {
         alert('Task deleted!')
-        objetive.parentNode.parentNode.parentNode.remove()
+        objetive.offsetParent.parentNode.remove()
         const deleteId = parseInt(objetive.getAttribute('task-id'))
         const newTaskList = taskList.filter(i => i.id != deleteId)
         taskList = newTaskList
         localStorage.setItem('tasks', JSON.stringify(taskList))
+        
     }
-    if(objetive.classList.contains('task-group-content')) {
-        let objetiveGrid = objetive.nextSibling.nextSibling
+
+    // Acordeon
+    if(objetive.classList.contains('acordeon')) {
+        let objetiveGrid = objetive.parentNode.nextElementSibling
         objetiveGrid.classList.toggle('show')
     }
 }, false)
@@ -140,17 +145,19 @@ function createTask() {
     let row = document.createElement('tr')
     row.classList.add('task-group')
     row.innerHTML = `
-        <td class="task-group-content">
-            <span class="time">${taskList[taskList.length - 1].hourStart}</span>
-            <p class="task">${taskList[taskList.length - 1].task}</p>
+        <td class="task-group-content d-flex px-3 column-gap-3">
+            <span class="fs-4 fw-bold d-flex align-items-center">${taskList[taskList.length-1].hourStart}</span>
+            <hr>
+            <p class="acordeon m-0 w-100 fs-4 fw-normal d-flex align-items-center">${taskList[taskList.length-1].task}</p>
         </td>
         <td class="grid">
-            <div class="task-group-active">
-                <span class="time-active">${taskList[taskList.length - 1].hourFinish}</span>
-                <div class="task-group-info">
-                    <span class="category">${taskList[taskList.length - 1].category}</span>
-                    <p class="text">${taskList[taskList.length - 1].comment}</p>
-                    <a href="#" class="finish-task-btn" task-id="${taskList.id}">Finish task</a>
+            <div class="task-group-active d-flex px-3 column-gap-3">
+                <span class="fs-4 fw-bold">${taskList[taskList.length-1].hourFinish}</span>
+                <hr>
+                <div class="d-flex row-gap-3 w-100 flex-column pb-2">
+                    <span class="d-flex justify-content-center w-50 category p-1 fs-4 fw-bold">${taskList[taskList.length-1].category}</span>
+                    <p class="m-0 w-100 fs-4 fw-normal">${taskList[taskList.length-1].comment}</p>
+                    <a href="#" class="finish-task-btn p-3 d-flex justify-content-center align-items-center fs-4 fw-bold" task-id="${taskList[taskList.length-1].id}">Finish task</a>
                 </div>
             </div>
         </td>
@@ -158,9 +165,6 @@ function createTask() {
     `
     tasks.appendChild(row)
 }
-
-// Carrousel
-
 
 // Clear form function
 function clearForm() {
@@ -186,17 +190,19 @@ window.addEventListener('load', () => {
         let row = document.createElement('tr')
         row.classList.add('task-group')
         row.innerHTML = `
-            <td class="task-group-content">
-                <span class="time">${i.hourStart}</span>
-                <p class="task">${i.task}</p>
+            <td class="task-group-content d-flex px-3 column-gap-3">
+                <span class="fs-4 fw-bold d-flex align-items-center">${i.hourStart}</span>
+                <hr>
+                <p class="acordeon m-0 w-100 fs-4 fw-normal d-flex align-items-center">${i.task}</p>
             </td>
             <td class="grid">
-                <div class="task-group-active">
-                    <span class="time-active">${i.hourFinish}</span>
-                    <div class="task-group-info">
-                        <span class="category">${i.category}</span>
-                        <p class="text">${i.comment}</p>
-                        <a href="#" class="finish-task-btn" task-id="${i.id}">Finish task</a>
+                <div class="task-group-active d-flex px-3 column-gap-3">
+                    <span class="fs-4 fw-bold">${i.hourFinish}</span>
+                    <hr>
+                    <div class="d-flex row-gap-3 w-100 flex-column pb-2">
+                        <span class="d-flex justify-content-center w-50 category p-1 fs-4 fw-bold">${i.category}</span>
+                        <p class="m-0 w-100 fs-4 fw-normal">${i.comment}</p>
+                        <a href="#" class="finish-task-btn p-3 d-flex justify-content-center align-items-center fs-4 fw-bold" task-id="${i.id}">Finish task</a>
                     </div>
                 </div>
             </td>
