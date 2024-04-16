@@ -153,4 +153,12 @@ hr {
         width: 75%;
         margin: 0 auto;
     }
+
+    .finish-task-btn {
+        width: 50%;
+    }
+
+    .category {
+        width: 25% !important;
+    }
 }

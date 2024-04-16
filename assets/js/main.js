@@ -154,7 +154,7 @@ function createTask() {
             <div class="task-group-active d-flex px-3 column-gap-3">
                 <span class="fs-4 fw-bold">${taskList[taskList.length-1].hourFinish}</span>
                 <hr>
-                <div class="d-flex row-gap-3 w-100 flex-column pb-2">
+                <div class="d-flex row-gap-3 w-100 flex-column pb-2" id="taskInfo">
                     <span class="d-flex justify-content-center w-50 category p-1 fs-4 fw-bold">${taskList[taskList.length-1].category}</span>
                     <p class="m-0 w-100 fs-4 fw-normal">${taskList[taskList.length-1].comment}</p>
                     <a href="#" class="finish-task-btn p-3 d-flex justify-content-center align-items-center fs-4 fw-bold" task-id="${taskList[taskList.length-1].id}">Finish task</a>
@@ -193,16 +193,16 @@ window.addEventListener('load', () => {
             <td class="task-group-content d-flex px-3 column-gap-3">
                 <span class="fs-4 fw-bold d-flex align-items-center">${i.hourStart}</span>
                 <hr>
-                <p class="acordeon m-0 w-100 fs-4 fw-normal d-flex align-items-center">${i.task}</p>
+                <p class="acordeon m-0 w-100 fs-5 fw-normal d-flex align-items-center">${i.task}</p>
             </td>
             <td class="grid">
                 <div class="task-group-active d-flex px-3 column-gap-3">
                     <span class="fs-4 fw-bold">${i.hourFinish}</span>
                     <hr>
-                    <div class="d-flex row-gap-3 w-100 flex-column pb-2">
-                        <span class="d-flex justify-content-center w-50 category p-1 fs-4 fw-bold">${i.category}</span>
-                        <p class="m-0 w-100 fs-4 fw-normal">${i.comment}</p>
-                        <a href="#" class="finish-task-btn p-3 d-flex justify-content-center align-items-center fs-4 fw-bold" task-id="${i.id}">Finish task</a>
+                    <div class="d-flex row-gap-3 w-100 flex-column pb-2" id="taskInfo">
+                        <span class="d-flex justify-content-center w-50 category p-1 fs-5 fw-bold">${i.category}</span>
+                        <p class="m-0 w-100 fs-5 fw-light"><strong>Description:</strong> ${i.comment}</p>
+                        <a href="#" class="finish-task-btn p-3 d-flex justify-content-center align-items-center fs-5 fw-bold" task-id="${i.id}">Finish task</a>
                     </div>
                 </div>
             </td>
