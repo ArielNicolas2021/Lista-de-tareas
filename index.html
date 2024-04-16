@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List | ArielNicolas2021</title>
-    <link rel="stylesheet" href="style.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <main>
-        <h1>Tasks</h1>
-        <table id="tasks">
+    <main class="container">
+        <h1 class="pt-3 fw-bold">Tasks</h1>
+        <table class="d-flex flex-column row-gap-3" id="tasks">
         </table>
 
         <div class="new-task">
@@ -18,32 +22,35 @@
                     <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
                 </svg>
             </div>
-            <div class="position" id="position">
-                <form class="new-task-form" id="form">
-                    <h1>New task</h1>
-                    <label for="task">Task:</label>
-                    <input type="text" name="task" id="task" placeholder="Enter your task here..." class="task-form" autocomplete="off">
-                    <div class="labels">
-                        <label for="hourStart" class="start-label">Hour start:</label>
-                        <label for="hourFinish" class="finish-label">Hour finish:</label>    
+            <div class="position position-fixed bottom-0 p-0" id="position">
+                <form class="new-task-form d-flex flex-column row-gap-1" id="form">
+                    <h2 class="fs-1 fw-bold">New task</h2>
+                    <div class="task-input-block">
+                        <label for="task" class="fs-6 fw-bold">Task:</label>
+                        <input type="text" name="task" id="task" placeholder="Enter your task here..." class="task-form p-1 w-100" autocomplete="off">
                     </div>
-                    <div class="hour-inputs">
-                        <input type="time" name="hourStart" id="hourStart" list="hour" class="hour-input">
-                        <h2>-</h2>
-                        <input type="time" name="hourFinish" id="hourFinish" list="hour" class="hour-input">    
+                    <div class="hours-inputs row">
+                        <div class="start-hour-input col d-flex flex-column justify-content-center">
+                            <label for="hourStart" class="start-label fs-6 fw-bold">Hour start:</label>
+                            <input type="time" name="hourStart" id="hourStart" list="hour" class="hour-input p-1">
+                        </div>
+                        <div class="finish-hour-input col d-flex flex-column justify-content-center">
+                            <label for="hourFinish" class="finish-label fs-6 fw-bold">Hour finish:</label>    
+                            <input type="time" name="hourFinish" id="hourFinish" list="hour" class="hour-input p-1">    
+                        </div>
                     </div>
-                    <div class="category-block">
-                        <div class="category-block-content">
-                            <span class="category" id="personalCat">Personal</span>
-                            <span class="category" id="familyCat">Family</span>
-                            <span class="category" id="fitCat">Fitness</span>
-                            <span class="category" id="foodCat">Food</span>
-                            <span class="category" id="workCat">Work</span>
-                            <span class="category" id="otherCat">Other</span>    
+                    <div class="container-fluid">
+                        <div class="row gap-2 justify-content-center">
+                            <span class="cat bg-light" id="personalCat">Personal</span>
+                            <span class="cat bg-light" id="familyCat">Family</span>
+                            <span class="cat bg-light" id="fitCat">Fitness</span>
+                            <span class="cat bg-light" id="foodCat">Food</span>
+                            <span class="cat bg-light" id="workCat">Work</span>
+                            <span class="cat bg-light" id="otherCat">Other</span>    
                         </div>
                     </div>
                     <label for="comment">Description:</label>
-                    <textarea name="comment" id="comment" cols="30" rows="5" placeholder="Enter your description here..." class="comment"></textarea>
+                    <textarea name="comment" id="comment" cols="30" rows="3" placeholder="Enter your description here..." class="comment fs-6 fw-bold"></textarea>
                     <a href="#" type="submit" class="submit-task-btn" id="submitBtn">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/>
@@ -81,6 +88,9 @@
         </div>
     </main>
 
-    <script src="main.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="assets/js/bootstrap.js"></script>
+
+    <script src="assets/js/main.js"></script>
 </body>
 </html>
