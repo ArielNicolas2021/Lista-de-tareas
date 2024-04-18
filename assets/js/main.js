@@ -80,9 +80,17 @@ form.addEventListener('submit', (e) => {
     e.preventDefault()
 })
 
+// Close form
+let closeForm = document.getElementById('closeForm')
+
+closeForm.addEventListener('click', () => {
+    addTaskBtn.style.display = 'block'
+    position.classList.remove('active-form')
+    form.classList.remove('p-3')
+    submitBtn.style.display = 'none'
+})
+
 let taskList = []
-
-
 //Add task function
 submitBtn.addEventListener('click', () => {
     //Check valid inputs
@@ -156,7 +164,7 @@ function createTask() {
                 <hr>
                 <div class="d-flex row-gap-3 w-100 flex-column pb-2" id="taskInfo">
                     <span class="d-flex justify-content-center w-50 category p-1 fs-4 fw-bold">${taskList[taskList.length-1].category}</span>
-                    <p class="m-0 w-100 fs-4 fw-normal">${taskList[taskList.length-1].comment}</p>
+                    <p class="m-0 w-100 fs-4 fw-light"><strong>Description:</strong> ${taskList[taskList.length-1].comment}</p>
                     <a href="#" class="finish-task-btn p-3 d-flex justify-content-center align-items-center fs-4 fw-bold" task-id="${taskList[taskList.length-1].id}">Finish task</a>
                 </div>
             </div>

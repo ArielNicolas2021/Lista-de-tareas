@@ -88,8 +88,13 @@ hr {
 .new-task-form {
     border-radius: 2rem 2rem 0 0;
     background-color: #eee;
-    overflow: scroll;
+    overflow: hidden;
     box-shadow: 1px 10px 10px -5px rgba(0,0,0,0.4);
+}
+
+.close-form-btn {
+    position: absolute;
+    right: 0;
 }
 
 .active-form {
@@ -105,6 +110,8 @@ hr {
 
 .cat {
     width: 30%;
+    text-align: center;
+    cursor: pointer;
 }
 
 .hour-input {
@@ -160,5 +167,9 @@ hr {
 
     .category {
         width: 25% !important;
+    }
+
+    .new-task-btn {
+        right: 16%;
     }
 }
