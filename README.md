@@ -10,5 +10,5 @@ Aplicación web para organizar tus tareas diarias. Puedes elegir el horario, la 
 - Bootstrap
 
 ## Imagenes
-[.](./assets/images/Grabar_2024_04_18_16_45_21_258.gif)
-[.](./assets/images/Grabar_2024_04_18_16_48_13_424.gif)
+![Desktop](./assets/images/Grabar_2024_04_18_16_45_21_258.gif)
+![Mobile](./assets/images/Grabar_2024_04_18_16_48_13_424.gif)
